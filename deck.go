@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
+	"os"
 	"strings"
+	"time"
 )
 
 type deck []string
@@ -37,4 +40,23 @@ func (d deck) toString() string {
 
 func (d deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+}
+
+func readFromFile(filename string) deck {
+	bs, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("ERROR: ", err)
+		os.Exit(1)
+	}
+	d := strings.Split(string(bs), ",")
+	return deck(d)
+}
+
+func (d deck) shuffle() {
+	src := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(src)
+	for i := range d {
+		n := r.Intn(len(d) - 1)
+		d[i], d[n] = d[n], d[i]
+	}
 }
