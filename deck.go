@@ -12,6 +12,7 @@ import (
 type deck []string
 
 func newDeck() deck {
+	var a = fetchCommand;
 	cards := deck{}
 	suits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
 	vals := []string{"Ace", "Two", "Three", "Four"}
