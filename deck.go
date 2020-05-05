@@ -12,7 +12,7 @@ import (
 type deck []string
 
 func newDeck() deck {
-	cards := deck{}
+	cards := new deck{}
 	suits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
 	vals := []string{"Ace", "Two", "Three", "Four"}
 
